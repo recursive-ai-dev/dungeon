@@ -6,7 +6,7 @@
 # (none)
 
 # Local imports
-from dungeon.multi_ui import run_multiplayer
+from .multi_ui import run_multiplayer
 
 
 if __name__ == "__main__":

@@ -40,14 +40,14 @@ from textual.widgets import (
 )
 from textual.worker import Worker
 
-from dungeon.entities import (
+from .entities import (
     CurioMerchant,
     Item,
     LoreSystem,
     Player,
     Stairs,
 )
-from dungeon.engine import GameEngine
+from .engine import GameEngine
 
 
 # ═══════════════════════════════════════════════════════════════════════════════

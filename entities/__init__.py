@@ -14,10 +14,10 @@ from typing import List, Optional, TYPE_CHECKING, Union
 
 # Local imports
 if TYPE_CHECKING:
-    from dungeon.engine import GameEngine
+    from ..engine import GameEngine
 
 # Import from submodules
-from dungeon.entities.ai import (
+from .ai import (
     AIState,
     ActionResult,
     BaseAI,
@@ -34,7 +34,7 @@ from dungeon.entities.ai import (
     direction_toward,
     euclidean_distance,
 )
-from dungeon.entities.components import (
+from .components import (
     BaseComponent,
     Consumable,
     Equipment,
@@ -43,14 +43,14 @@ from dungeon.entities.components import (
     Inventory,
     Level,
 )
-from dungeon.entities.consumables import (
+from .consumables import (
     ConfusionConsumable,
     GoldConsumable,
     HealingConsumable,
     LightningConsumable,
     ManaRestorationConsumable,
 )
-from dungeon.entities.spells import (
+from .spells import (
     AbjurationSpell,
     ChronomancySpell,
     ConjurationSpell,
@@ -63,7 +63,7 @@ from dungeon.entities.spells import (
     SpellSchool,
     TransmutationSpell,
 )
-from dungeon.entities.status_effects import (
+from .status_effects import (
     AbsorbEffect,
     BarrierEffect,
     BurnEffect,

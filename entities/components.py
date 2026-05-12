@@ -8,8 +8,8 @@ from typing import TYPE_CHECKING, Optional
 
 # Local imports
 if TYPE_CHECKING:
-    from dungeon.engine import GameEngine
-    from dungeon.entities import Entity, Item
+    from ..engine import GameEngine
+    from . import Entity, Item
 
 
 class BaseComponent:
@@ -169,4 +169,4 @@ class Consumable(BaseComponent):
 
 
 # Import StatusEffectManager after definition to avoid circular import
-from dungeon.entities.status_effects import StatusEffectManager
+from .status_effects import StatusEffectManager

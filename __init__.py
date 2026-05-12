@@ -5,11 +5,11 @@ Dungeon - A TUI-based roguelike game
 __version__ = "1.0.0"
 
 # Core game engine
-from dungeon.engine import GameEngine
-from dungeon.map import Map, Rect, Tile, TileType
-from dungeon.save_system import save_system, SaveSystem, SaveSlot, PersistentContext
-from dungeon.storylets import storylet_system, Storylet, StoryletSystem
-from dungeon.network import (
+from .engine import GameEngine
+from .map import Map, Rect, Tile, TileType
+from .save_system import save_system, SaveSystem, SaveSlot, PersistentContext
+from .storylets import storylet_system, Storylet, StoryletSystem
+from .network import (
     MultiplayerClient,
     MultiplayerServer,
     GameState,
@@ -19,7 +19,7 @@ from dungeon.network import (
 )
 
 # Main entities
-from dungeon.entities import (
+from .entities import (
     AbjurationSpell,
     AbsorbEffect,
     AIState,

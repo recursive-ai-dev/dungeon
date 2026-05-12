@@ -7,7 +7,7 @@ import shutil
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from enum import Enum, auto
-from typing import Any, Dict, List, Optional, Protocol, TypeVar, Callable
+from typing import Any, Dict, List, Optional, Protocol, TypeVar, Callable, TYPE_CHECKING
 from pathlib import Path
 import time
 
@@ -16,7 +16,7 @@ import time
 
 # Local imports
 if TYPE_CHECKING:
-    from dungeon.engine import GameEngine
+    from .engine import GameEngine
 
 
 class SaveError(Exception):

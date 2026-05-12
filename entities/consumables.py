@@ -9,8 +9,8 @@ from typing import TYPE_CHECKING
 
 # Local imports
 if TYPE_CHECKING:
-    from dungeon.engine import GameEngine
-    from dungeon.entities import Entity
+    from ..engine import GameEngine
+    from . import Entity
 
 
 class GoldConsumable:
@@ -125,7 +125,7 @@ class ConfusionConsumable:
         if target:
             engine.messages.append(f"A purple mist envelops the {target.name}!")
             if hasattr(target, 'ai'):
-                from dungeon.entities.ai import ConfusedAI
+                from .ai import ConfusedAI
                 target.ai = ConfusedAI(target.ai, self.num_turns)
             return True
 

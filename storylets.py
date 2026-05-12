@@ -12,7 +12,7 @@ from typing import Any, Dict, List, Optional, TYPE_CHECKING, Callable
 
 # Local imports
 if TYPE_CHECKING:
-    from dungeon.engine import GameEngine
+    from .engine import GameEngine
 
 
 class StoryletCategory(Enum):
@@ -168,7 +168,7 @@ class Storylet:
             engine.messages.append(f"You took {effect.value} damage.")
         
         elif effect.effect_type == StoryletEffectType.STATUS_EFFECT:
-            from dungeon.entities.status_effects import StatusEffect
+            from .entities.status_effects import StatusEffect
             # Would need to import specific effect classes
             engine.messages.append(f"You feel {effect.value}.")
         

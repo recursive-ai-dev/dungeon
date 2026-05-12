@@ -10,8 +10,8 @@ from typing import TYPE_CHECKING, Callable, Optional
 
 # Local imports
 if TYPE_CHECKING:
-    from dungeon.engine import GameEngine
-    from dungeon.entities import Entity
+    from ..engine import GameEngine
+    from . import Entity
 
 
 class Spell:
@@ -193,7 +193,7 @@ class EvocationSpell(Spell):
     
     def _apply_elemental_effect(self, target: Entity, engine: GameEngine):
         """Apply status effect based on element."""
-        from dungeon.entities.status_effects import BurnEffect, FreezeEffect, StunEffect
+        from .status_effects import BurnEffect, FreezeEffect, StunEffect
         
         if self.element == "fire" and random.random() < 0.3:
             msg = target.fighter.status_effects.apply_effect(BurnEffect(3, 3), engine)
@@ -291,7 +291,7 @@ class ChronomancySpell(Spell):
         return f"{caster.name} warps time with {self.name}."
     
     def _apply_haste(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import HasteEffect
+        from .status_effects import HasteEffect
         if target and hasattr(target, 'fighter') and target.fighter:
             msg = target.fighter.status_effects.apply_effect(
                 HasteEffect(self.duration, 1), engine
@@ -302,7 +302,7 @@ class ChronomancySpell(Spell):
         return "The spell fizzles."
     
     def _apply_slow(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import SlowEffect
+        from .status_effects import SlowEffect
         if target and hasattr(target, 'fighter') and target.fighter:
             msg = target.fighter.status_effects.apply_effect(
                 SlowEffect(self.duration, 1), engine
@@ -330,7 +330,7 @@ class ChronomancySpell(Spell):
         return "Nothing to rewind."
     
     def _apply_time_stop(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import StunEffect
+        from .status_effects import StunEffect
         if target and hasattr(target, 'fighter') and target.fighter:
             msg = target.fighter.status_effects.apply_effect(
                 StunEffect(self.duration, 0), engine
@@ -350,7 +350,7 @@ class ChronomancySpell(Spell):
     
     def _apply_dilation(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
         """Target takes damage over time as they age rapidly."""
-        from dungeon.entities.status_effects import DecayEffect
+        from .status_effects import DecayEffect
         if target and hasattr(target, 'fighter') and target.fighter:
             msg = target.fighter.status_effects.apply_effect(
                 DecayEffect(self.duration, self.damage), engine
@@ -520,7 +520,7 @@ class MentomancySpell(Spell):
         return f"{caster.name} probes {target.name}'s mind."
     
     def _apply_fear(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import FearEffect
+        from .status_effects import FearEffect
         msg = target.fighter.status_effects.apply_effect(
             FearEffect(self.duration, 2), engine
         )
@@ -529,7 +529,7 @@ class MentomancySpell(Spell):
         return f"{target.name} is overcome with terror!"
     
     def _apply_charm(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import CharmEffect
+        from .status_effects import CharmEffect
         msg = target.fighter.status_effects.apply_effect(
             CharmEffect(self.duration, caster), engine
         )
@@ -538,7 +538,7 @@ class MentomancySpell(Spell):
         return f"{target.name} looks at {caster.name} with adoration!"
     
     def _apply_confusion(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import ConfusionEffect
+        from .status_effects import ConfusionEffect
         msg = target.fighter.status_effects.apply_effect(
             ConfusionEffect(self.duration, 1), engine
         )
@@ -626,9 +626,9 @@ class ConjurationSpell(Spell):
         return f"{caster.name} conjures... nothing."
     
     def _summon_creature(self, caster: Entity, pos: tuple[int, int], engine: GameEngine) -> str:
-        from dungeon.entities import Entity
-        from dungeon.components.fighter import Fighter
-        from dungeon.ai import BasicMonster
+        from . import Entity
+        from .components import Fighter
+        from .ai import HostileAI as BasicMonster
         
         x, y = pos
         if not engine.game_map.is_in_bounds(x, y) or not engine.game_map.tiles[y][x].walkable:
@@ -707,7 +707,7 @@ class AbjurationSpell(Spell):
         return f"{caster.name} weaves protective magic."
     
     def _apply_barrier(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import BarrierEffect
+        from .status_effects import BarrierEffect
         if target and hasattr(target, 'fighter') and target.fighter:
             msg = target.fighter.status_effects.apply_effect(
                 BarrierEffect(self.duration, self.potency), engine
@@ -718,7 +718,7 @@ class AbjurationSpell(Spell):
         return "The barrier collapses."
     
     def _apply_reflect(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import ReflectEffect
+        from .status_effects import ReflectEffect
         if target and hasattr(target, 'fighter') and target.fighter:
             msg = target.fighter.status_effects.apply_effect(
                 ReflectEffect(self.duration, self.potency), engine
@@ -729,7 +729,7 @@ class AbjurationSpell(Spell):
         return "The reflection fails."
     
     def _apply_absorb(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import AbsorbEffect
+        from .status_effects import AbsorbEffect
         if target and hasattr(target, 'fighter') and target.fighter:
             msg = target.fighter.status_effects.apply_effect(
                 AbsorbEffect(self.duration, self.potency), engine
@@ -762,7 +762,7 @@ class AbjurationSpell(Spell):
         return "Nothing to dispel."
     
     def _apply_magic_armor(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import MagicArmorEffect
+        from .status_effects import MagicArmorEffect
         if target and hasattr(target, 'fighter') and target.fighter:
             msg = target.fighter.status_effects.apply_effect(
                 MagicArmorEffect(self.duration, self.potency), engine
@@ -821,7 +821,7 @@ class NecromancySpell(Spell):
         return "The drain finds no life to steal."
     
     def _apply_curse(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import CurseEffect
+        from .status_effects import CurseEffect
         if target and hasattr(target, 'fighter') and target.fighter:
             msg = target.fighter.status_effects.apply_effect(
                 CurseEffect(5, 3), engine
@@ -849,7 +849,7 @@ class NecromancySpell(Spell):
         return "No corpse to raise."
     
     def _apply_wither(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import WitherEffect
+        from .status_effects import WitherEffect
         if target and hasattr(target, 'fighter') and target.fighter:
             msg = target.fighter.status_effects.apply_effect(
                 WitherEffect(4, self.damage), engine
@@ -959,7 +959,7 @@ class DivinationSpell(Spell):
         return "Nothing to identify."
     
     def _apply_foresight(self, caster: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import ForesightEffect
+        from .status_effects import ForesightEffect
         if hasattr(caster, 'fighter') and caster.fighter:
             msg = caster.fighter.status_effects.apply_effect(
                 ForesightEffect(self.duration, 5), engine
@@ -1004,7 +1004,7 @@ class IllusionSpell(Spell):
         return f"{caster.name} weaves an illusion."
     
     def _apply_invisibility(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import InvisibleEffect
+        from .status_effects import InvisibleEffect
         tgt = target or caster
         if hasattr(tgt, 'fighter') and tgt.fighter:
             msg = tgt.fighter.status_effects.apply_effect(
@@ -1038,7 +1038,7 @@ class IllusionSpell(Spell):
     
     def _create_phantasm(self, caster: Entity, target_pos: tuple[int, int], engine: GameEngine) -> str:
         """Create a terrifying illusion at position."""
-        from dungeon.entities import Entity
+        from . import Entity
         x, y = target_pos
         phantasm = Entity(
             x=x, y=y,
@@ -1054,7 +1054,7 @@ class IllusionSpell(Spell):
         return "A horrifying phantasm materializes!"
     
     def _apply_blind(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import BlindEffect
+        from .status_effects import BlindEffect
         if target and hasattr(target, 'fighter') and target.fighter:
             msg = target.fighter.status_effects.apply_effect(
                 BlindEffect(self.duration, 1), engine
@@ -1065,7 +1065,7 @@ class IllusionSpell(Spell):
         return "The blindness fails."
     
     def _apply_silence(self, caster: Entity, target: Entity, engine: GameEngine) -> str:
-        from dungeon.entities.status_effects import SilenceEffect
+        from .status_effects import SilenceEffect
         if target and hasattr(target, 'fighter') and target.fighter:
             msg = target.fighter.status_effects.apply_effect(
                 SilenceEffect(self.duration, 1), engine
@@ -1849,7 +1849,7 @@ class MagicConsumable:
     
     @staticmethod
     def apply_spell_effects(caster, target, spell: Spell, engine: GameEngine) -> None:
-        from dungeon.entities.status_effects import BurnEffect, FreezeEffect, PoisonEffect, StunEffect
+        from .status_effects import BurnEffect, FreezeEffect, PoisonEffect, StunEffect
         
         if spell.damage > 0 and target is not None and hasattr(target, 'fighter') and target.fighter:
             actual_damage = max(1, spell.get_effective_damage() - target.fighter.defense)

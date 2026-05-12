@@ -9,9 +9,9 @@ from textual.screen import Screen, ModalScreen
 from textual.widgets import Button, Footer, Header, Input, Label, Static
 
 # Local imports
-from dungeon.entities import Player
-from dungeon.engine import GameEngine
-from dungeon.network import GameState, MultiplayerClient, MultiplayerServer
+from .entities import Player
+from .engine import GameEngine
+from .network import GameState, MultiplayerClient, MultiplayerServer
 
 
 class ConnectionScreen(Screen):

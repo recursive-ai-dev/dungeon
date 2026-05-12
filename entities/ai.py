@@ -15,8 +15,8 @@ from enum import Enum, auto
 from typing import TYPE_CHECKING, Iterator, Protocol
 
 if TYPE_CHECKING:
-    from dungeon.engine import GameEngine
-    from dungeon.entities import Entity
+    from ..engine import GameEngine
+    from . import Entity
 
 
 # ---------------------------------------------------------------------------

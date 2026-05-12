@@ -22,7 +22,7 @@ from typing import (
 # (none)
 
 # Local imports
-from dungeon.entities import (
+from .entities import (
     BurnEffect,
     ConfusionConsumable,
     CurioMerchant,
@@ -45,10 +45,10 @@ from dungeon.entities import (
     TransmutationSpell,
     WetEffect,
 )
-from dungeon.map import Map, Rect
-from dungeon.network import GameState
-from dungeon.save_system import save_system
-from dungeon.storylets import storylet_system
+from .map import Map, Rect
+from .network import GameState
+from .save_system import save_system
+from .storylets import storylet_system
 
 
 # ============================================================================
@@ -391,12 +391,13 @@ class GameEngine:
         self.run_curio_spawned = False
         
         self._achievements: List[str] = []
-        self._track_achievements()
-        
+
         # Player setup
         self.player = Player(0, 0, player_id=local_player_id)
         self.player.fighter.ascension_tier = self.ascension_tier
         self.players = {local_player_id: self.player}
+
+        self._track_achievements()
         
         # NEW: Seed-based RNG for reproducible floors (optional)
         self._floor_seed: Optional[int] = None
