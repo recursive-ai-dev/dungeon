@@ -8,12 +8,15 @@ from typing import TYPE_CHECKING
 # (none)
 
 # Local imports
+from .components import Consumable
+
 if TYPE_CHECKING:
-    from ..engine import GameEngine
+    from engine import GameEngine
     from . import Entity
 
 
-class GoldConsumable:
+
+class GoldConsumable(Consumable):
     """Pick-up treasure: using from inventory banks the coin (or auto-counts as flavor)."""
 
     def __init__(self, amount: int):
@@ -23,10 +26,10 @@ class GoldConsumable:
         consumer = self.entity.parent
         consumer.gold += self.amount
         engine.messages.append(f"You tally {self.amount} tarnished coin into your hoard.")
-        return True
+        return self.amount
 
 
-class ManaRestorationConsumable:
+class ManaRestorationConsumable(Consumable):
     def __init__(self, amount: int):
         self.amount = amount
 
@@ -44,7 +47,7 @@ class ManaRestorationConsumable:
         return True
 
 
-class HealingConsumable:
+class HealingConsumable(Consumable):
     def __init__(self, amount: int):
         self.amount = amount
 
@@ -60,7 +63,7 @@ class HealingConsumable:
         return True
 
 
-class LightningConsumable:
+class LightningConsumable(Consumable):
     def __init__(self, damage: int, maximum_range: int):
         self.damage = damage
         self.maximum_range = maximum_range
@@ -106,7 +109,7 @@ class LightningConsumable:
         return False
 
 
-class ConfusionConsumable:
+class ConfusionConsumable(Consumable):
     def __init__(self, num_turns: int):
         self.num_turns = num_turns
 

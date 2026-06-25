@@ -14,7 +14,7 @@ from typing import List, Optional, TYPE_CHECKING, Union
 
 # Local imports
 if TYPE_CHECKING:
-    from ..engine import GameEngine
+    from engine import GameEngine
 
 # Import from submodules
 from .ai import (
@@ -102,6 +102,9 @@ class Entity:
     equipment: Optional[Equipment] = None
     equippable: Optional[Equippable] = None
     barks: List[str] = field(default_factory=list)
+
+    def __hash__(self):
+        return id(self)
 
     def __post_init__(self):
         if self.fighter:
@@ -328,6 +331,38 @@ class LoreSystem:
         if random.random() > probability:
             return None, None
         return random.choice(cls._lore_pool)
+
+    @classmethod
+    def get_death_scene(cls, depth: int, stats: dict) -> str:
+        if depth < 3:
+            return "A minor failure in the shallow sectors. Your logs are purged."
+        if depth < 7:
+            return "Deep in the sub-routines, you were caught in a race condition. Termination is final."
+        if stats.get("brutality", 0) > 20:
+            return "You fought with savage recursion, but the stack finally overflowed."
+        return "The Maw consumes your data. You are but a footnote in the history of the system."
+
+    @classmethod
+    def get_hint(cls, depth: int, px: int, py: int, entities: list, game_map) -> str:
+        import random
+        hints = [
+            "Rest with [Space] to recover spirit and let the world turn.",
+            "Items in your satchel can be used with [Enter] or discarded with [d].",
+            "Shrines offer power, but only once. Choose your moment.",
+            "The Curio Peddler's wares are unique; spend your coin wisely.",
+            "Some walls are thinner than they look... stone can become mud.",
+        ]
+
+        for e in entities:
+            if hasattr(e, "fighter") and e.fighter and e.name != "Player":
+                dist = max(abs(e.x - px), abs(e.y - py))
+                if dist < 3:
+                    return f"The {e.name} is dangerously close. Prepare your arcana."
+
+        if depth > 5:
+            hints.append("The Legacy Kernel lies deeper still. You are not ready.")
+
+        return random.choice(hints)
 
 
 class Shrine(Entity):
