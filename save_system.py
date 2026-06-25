@@ -16,7 +16,7 @@ import time
 
 # Local imports
 if TYPE_CHECKING:
-    from .engine import GameEngine
+    from engine import GameEngine
 
 
 class SaveError(Exception):

@@ -15,7 +15,7 @@ from enum import Enum, auto
 from typing import TYPE_CHECKING, Iterator, Protocol
 
 if TYPE_CHECKING:
-    from ..engine import GameEngine
+    from engine import GameEngine
     from . import Entity
 
 
@@ -697,6 +697,16 @@ class StateMachineAI(BaseAI):
         return ActionResult.NO_ACTION
 
     def _act_idle(self, engine: GameEngine) -> ActionResult:
+        # Subtle wandering while idle
+        if random.random() < 0.2:
+            dx, dy = random.randint(-1, 1), random.randint(-1, 1)
+            nx, ny = self.entity.x + dx, self.entity.y + dy
+            if (
+                not engine.get_blocking_entity_at(nx, ny)
+                and engine.game_map.is_walkable(nx, ny)
+            ):
+                self.entity.move(dx, dy)
+                return ActionResult.SUCCESS
         return ActionResult.NO_ACTION
 
     def _act_chase(self, engine: GameEngine) -> ActionResult:
@@ -737,4 +747,6 @@ class StateMachineAI(BaseAI):
         return ActionResult.FAILURE
 
     def _act_patrol(self, engine: GameEngine) -> ActionResult:
-        return ActionResult.NO_ACTION
+        # If we have no target, just wander or move between waypoints
+        # For simplicity in StateMachineAI, we'll treat it as extended idle/wander
+        return self._act_idle(engine)

@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING
 
 # Local imports
 if TYPE_CHECKING:
-    from ..engine import GameEngine
+    from engine import GameEngine
 
 
 class StatusEffect:

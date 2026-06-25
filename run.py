@@ -3,15 +3,9 @@
 import sys
 from pathlib import Path
 
-# Add parent directory to path for package imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-# Third-party imports
-# (none)
-
 # Local imports
-from dungeon.main import DungeonApp
-from dungeon.multi_ui import run_multiplayer
+from main import DungeonApp
+from multi_ui import run_multiplayer
 
 
 def main():
@@ -26,6 +20,11 @@ def main():
     print()
 
     while True:
+        # For testing purposes in non-interactive environment
+        if len(sys.argv) > 1 and sys.argv[1] == "--test":
+            print("Test mode: importing successful")
+            return
+
         choice = input("Enter choice (1-3): ").strip()
 
         if choice == "1":

@@ -22,7 +22,7 @@ from typing import (
 # (none)
 
 # Local imports
-from .entities import (
+from entities import (
     BurnEffect,
     ConfusionConsumable,
     CurioMerchant,
@@ -45,10 +45,10 @@ from .entities import (
     TransmutationSpell,
     WetEffect,
 )
-from .map import Map, Rect
-from .network import GameState
-from .save_system import save_system
-from .storylets import storylet_system
+from map import Map, Rect
+from network import GameState
+from save_system import save_system
+from storylets import storylet_system
 
 
 # ============================================================================
@@ -228,7 +228,7 @@ class SpatialIndex:
         """Return sorted list of hostile entities by distance."""
         hostiles = []
         for entity in self.get_in_radius(x, y, radius):
-            if entity.fighter and not isinstance(entity, Player):
+            if entity.fighter and not isinstance(entity, Player) and isinstance(entity, Monster):
                 dist = max(abs(entity.x - x), abs(entity.y - y))
                 hostiles.append((dist, entity))
         hostiles.sort(key=lambda t: t[0])
@@ -381,6 +381,7 @@ class GameEngine:
         self.spatial = SpatialIndex(map_width, map_height)
         self.combat_ledger = CombatLedger()
         self.economy = EconomyTracker()
+        self.turn_counter = 0
         self.ascension = AscensionModifier(self.ascension_tier)
         
         # Original state (preserved)
@@ -393,9 +394,9 @@ class GameEngine:
         self._achievements: List[str] = []
 
         # Player setup
+        self.players = {}
         self.player = Player(0, 0, player_id=local_player_id)
         self.player.fighter.ascension_tier = self.ascension_tier
-        self.players = {local_player_id: self.player}
 
         self._track_achievements()
         
@@ -1226,6 +1227,7 @@ class GameEngine:
     # -------------------------------------------------------------------------
     
     def handle_enemy_turns(self) -> None:
+        self.turn_counter += 1
         # Process status effects for all players
         for player in self.players.values():
             if player.fighter:

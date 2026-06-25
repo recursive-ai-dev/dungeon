@@ -40,14 +40,14 @@ from textual.widgets import (
 )
 from textual.worker import Worker
 
-from .entities import (
+from entities import (
     CurioMerchant,
     Item,
     LoreSystem,
     Player,
     Stairs,
 )
-from .engine import GameEngine
+from engine import GameEngine
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -646,7 +646,7 @@ class StatsWidget(Static):
         hp_bar = f"[{'█' * int(hp_pct * 10)}{'░' * (10 - int(hp_pct * 10))}]"
 
         stats_text = (
-            f"Depth: {self.engine.dungeon_level}{ng_plus_str}\n"
+            f"Depth: {self.engine.dungeon_level}{ng_plus_str}  ·  [dim]Turn {self.engine.turn_counter}[/dim]\n"
             f"Vitality: [{hp_color}]{hp_bar} {p.fighter.hp}/{p.fighter.max_hp}[/]{mana_bar}\n"
             f"Prestige: {p.level.current_level}\n"
             f"Essence: {p.level.current_xp}/{p.level.experience_to_next_level}\n"
@@ -863,6 +863,7 @@ class DungeonApp(App):
     }
 
     #title-buttons Button {
+        transition: background 150ms, border 150ms;
         margin: 0 1;
         min-width: 20;
     }
@@ -1014,6 +1015,7 @@ class DungeonApp(App):
     }
 
     #gameover-container Button {
+        transition: background 150ms, border 150ms;
         margin: 1 0;
         width: 100%;
     }
@@ -1085,6 +1087,7 @@ class DungeonApp(App):
     }
 
     #help-container Button {
+        transition: background 150ms, border 150ms;
         margin-top: 1;
         width: 100%;
     }
@@ -1125,6 +1128,7 @@ class DungeonApp(App):
     }
 
     #shop-container Button {
+        transition: background 150ms, border 150ms;
         margin: 1 0;
         width: 100%;
     }
@@ -1195,6 +1199,7 @@ class DungeonApp(App):
     }
 
     #settings-container Button {
+        transition: background 150ms, border 150ms;
         margin-top: 1;
         width: 100%;
     }
@@ -1247,7 +1252,8 @@ class DungeonApp(App):
     }
 
     Button:hover {
-        background: #333;
+        background: #222;
+        border: tall #d4af37;
     }
 
     Button:focus {

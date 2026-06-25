@@ -9,9 +9,9 @@ from textual.screen import Screen, ModalScreen
 from textual.widgets import Button, Footer, Header, Input, Label, Static
 
 # Local imports
-from .entities import Player
-from .engine import GameEngine
-from .network import GameState, MultiplayerClient, MultiplayerServer
+from entities import Player
+from engine import GameEngine
+from network import GameState, MultiplayerClient, MultiplayerServer
 
 
 class ConnectionScreen(Screen):
@@ -151,7 +151,7 @@ class MultiplayerStatsWidget(Static):
         if not player:
             return "You are dead!"
         
-        hp_color = "#00ff00" if player["hp"] > (player["max_hp"] / 2) else "#ff0000"
+        hp_color = "#d4af37" if player["hp"] > (player["max_hp"] / 2) else "#ff0000"
         
         return (
             f"Floor: {self.game_state.dungeon_level}\n"
@@ -294,39 +294,33 @@ class MultiplayerGameScreen(Screen):
 
 
 class MultiplayerApp(App):
+
     CSS = """
-    Screen { background: #1a1a1a; }
+    Screen {
+        background: #0a0a0a;
+    }
     #main-container { height: 1fr; width: 1fr; }
-    #sidebar { width: 28; background: #262626; border-left: solid #444; padding: 1; }
+    #sidebar { width: 28; background: #111; border-left: solid #444; padding: 1; }
     MultiplayerMapWidget { height: 1fr; width: 1fr; border: heavy #444; content-align: center middle; font-family: monospace; color: #ddd; }
-    MultiplayerLogWidget { height: 10; border-top: solid #444; padding: 1; background: #121212; color: #aaa; }
-    MultiplayerStatsWidget { height: auto; color: #00ff00; }
+    MultiplayerLogWidget { height: 10; border-top: solid #444; padding: 1; background: #0c0c0c; color: #aaa; }
+    MultiplayerStatsWidget { height: auto; color: #d4af37; }
     #sidebar-label { text-style: bold; color: #fff; margin-bottom: 1; }
     #players-widget { height: auto; margin-top: 1; color: #aaa; }
-    #conn-container, #host-container, #join-container { width: 40; height: auto; align: center middle; background: #262626; border: thick #444; padding: 2; }
-    #conn-header, #host-header, #join-header { text-style: bold; color: #fff; text-align: center; margin-bottom: 1; }
-    Button { margin: 1 0; }
-    #conn-sub { margin-bottom: 1; }
-    #spacer { margin: 1; }
+    #conn-container, #host-container, #join-container { width: 40; height: auto; align: center middle; background: #161616; border: thick #444; padding: 2; }
+    #conn-header, #host-header, #join-header { text-style: bold; color: #d4af37; text-align: center; margin-bottom: 1; }
+    #conn-sub { text-align: center; margin-bottom: 1; }
+    #spacer { height: 1; }
     Input { margin-bottom: 1; }
-    """
-
-    BINDINGS = [
-        ("q", "quit", "Quit"),
-        ("space", "wait", "Wait"),
-        ("up,w", "move(0, -1)", "Up"),
-        ("down,s", "move(0, 1)", "Down"),
-        ("left,a", "move(-1, 0)", "Left"),
-        ("right,d", "move(1, 0)", "Right"),
-        ("g", "pickup", "Get"),
-        (">", "take_stairs", "Stairs"),
-    ]
-
-    SCREENS = {
-        "connection": ConnectionScreen,
-        "host": HostSetupScreen,
-        "join": JoinSetupScreen,
+    Button {
+        transition: background 150ms, border 150ms;
+        margin: 1 0;
+        width: 100%;
     }
+    Button:hover {
+        background: #222;
+        border: tall #d4af37;
+    }
+    """
 
     def __init__(self):
         super().__init__()
@@ -360,7 +354,6 @@ class MultiplayerApp(App):
 
     def on_mount(self) -> None:
         self.push_screen(ConnectionScreen())
-
 
 def run_multiplayer():
     app = MultiplayerApp()
