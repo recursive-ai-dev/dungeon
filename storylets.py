@@ -169,8 +169,9 @@ class Storylet:
         
         elif effect.effect_type == StoryletEffectType.STATUS_EFFECT:
             from entities.status_effects import StatusEffect
-            # Would need to import specific effect classes
-            engine.messages.append(f"You feel {effect.value}.")
+            new_effect = StatusEffect(name=str(effect.value), duration=effect.duration, power=1)
+            msg = engine.player.fighter.status_effects.add_effect(new_effect, engine.player.fighter, engine)
+            engine.messages.append(f"You feel {effect.value}. {msg}")
         
         elif effect.effect_type == StoryletEffectType.STAT_BOOST:
             if hasattr(engine.player.fighter, effect.stat_name):

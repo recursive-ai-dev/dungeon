@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 # Standard library imports
 import sys
+import os
 from pathlib import Path
+
+# Ensure project root is in sys.path for absolute module resolution
+project_root = Path(__file__).parent.resolve()
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
 
 # Local imports
 from main import DungeonApp

@@ -17,7 +17,7 @@ if TYPE_CHECKING:
     from engine import GameEngine
 
 # Import from submodules
-from .ai import (
+from entities.ai import (
     AIState,
     ActionResult,
     BaseAI,
@@ -34,7 +34,7 @@ from .ai import (
     direction_toward,
     euclidean_distance,
 )
-from .components import (
+from entities.components import (
     BaseComponent,
     Consumable,
     Equipment,
@@ -43,14 +43,14 @@ from .components import (
     Inventory,
     Level,
 )
-from .consumables import (
+from entities.consumables import (
     ConfusionConsumable,
     GoldConsumable,
     HealingConsumable,
     LightningConsumable,
     ManaRestorationConsumable,
 )
-from .spells import (
+from entities.spells import (
     AbjurationSpell,
     ChronomancySpell,
     ConjurationSpell,
@@ -63,7 +63,7 @@ from .spells import (
     SpellSchool,
     TransmutationSpell,
 )
-from .status_effects import (
+from entities.status_effects import (
     AbsorbEffect,
     BarrierEffect,
     BurnEffect,
@@ -86,7 +86,7 @@ from .status_effects import (
 )
 
 
-@dataclass
+@dataclass(eq=False)
 class Entity:
     x: int
     y: int
@@ -343,7 +343,7 @@ class LoreSystem:
         return "The Maw consumes your data. You are but a footnote in the history of the system."
 
     @classmethod
-    def get_hint(cls, depth: int, px: int, py: int, entities: list, game_map) -> str:
+    def get_hint(cls, depth: int, px: int, py: int, entities: list) -> str:
         import random
         hints = [
             "Rest with [Space] to recover spirit and let the world turn.",
@@ -354,7 +354,7 @@ class LoreSystem:
         ]
 
         for e in entities:
-            if hasattr(e, "fighter") and e.fighter and e.name != "Player":
+            if hasattr(e, "fighter") and e.fighter and not isinstance(e, Player):
                 dist = max(abs(e.x - px), abs(e.y - py))
                 if dist < 3:
                     return f"The {e.name} is dangerously close. Prepare your arcana."

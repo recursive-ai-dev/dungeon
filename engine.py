@@ -228,7 +228,7 @@ class SpatialIndex:
         """Return sorted list of hostile entities by distance."""
         hostiles = []
         for entity in self.get_in_radius(x, y, radius):
-            if entity.fighter and not isinstance(entity, Player) and isinstance(entity, Monster):
+            if entity.fighter and not isinstance(entity, Player) and entity.ai:
                 dist = max(abs(entity.x - x), abs(entity.y - y))
                 hostiles.append((dist, entity))
         hostiles.sort(key=lambda t: t[0])
@@ -1524,8 +1524,7 @@ class GameEngine:
             self.dungeon_level,
             self.player.x,
             self.player.y,
-            self.entities,
-            self.game_map
+            self.entities
         )
     
     def get_tactical_info(self, x: int, y: int) -> str:

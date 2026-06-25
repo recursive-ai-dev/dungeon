@@ -102,6 +102,7 @@ class LightningConsumable(Consumable):
                         consumer.level.increase_level()
                     else:
                         engine.messages.append(f"You gained {xp_gained} experience points.")
+                engine.spatial.remove(target)
                 engine.entities.remove(target)
             return True
         
