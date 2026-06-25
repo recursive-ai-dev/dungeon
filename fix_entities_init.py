@@ -1,20 +1,13 @@
 import sys
 
-with open('entities/__init__.py', 'r') as f:
+with open('entities/__init__.py') as f:
     lines = f.readlines()
 
 new_lines = []
 for line in lines:
-    if "from .components import (" in line:
-        new_lines.append("from .components import (\n")
-    elif "from .consumables import (" in line:
-        new_lines.append("from .consumables import (\n")
-    elif "from .ai import (" in line:
-        new_lines.append("from .ai import (\n")
-    elif "from .spells import (" in line:
-        new_lines.append("from .spells import (\n")
-    elif "from .status_effects import (" in line:
-        new_lines.append("from .status_effects import (\n")
+    # Convert relative imports to absolute imports for specific modules
+    if any(m in line for m in [".components", ".consumables", ".ai", ".spells", ".status_effects"]) and "from ." in line:
+        new_lines.append(line.replace("from .", "from entities.", 1))
     else:
         new_lines.append(line)
 

@@ -1253,7 +1253,7 @@ class DungeonApp(App):
 
     Button:hover {
         background: #222;
-        border: tall #d4af37;
+        outline: tall #d4af37;
     }
 
     Button:focus {

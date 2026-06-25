@@ -705,7 +705,7 @@ class StateMachineAI(BaseAI):
                 not engine.get_blocking_entity_at(nx, ny)
                 and engine.game_map.is_walkable(nx, ny)
             ):
-                self.entity.move(dx, dy)
+                engine.spatial.move(self.entity, nx, ny)
                 return ActionResult.SUCCESS
         return ActionResult.NO_ACTION
 
@@ -722,7 +722,7 @@ class StateMachineAI(BaseAI):
         if nxt is None:
             return ActionResult.FAILURE
         dx, dy = nxt[0] - self.entity.x, nxt[1] - self.entity.y
-        self.entity.move(dx, dy)
+        engine.spatial.move(self.entity, nxt[0], nxt[1])
         return ActionResult.SUCCESS
 
     def _act_attack(self, engine: GameEngine) -> ActionResult:
@@ -742,7 +742,7 @@ class StateMachineAI(BaseAI):
             not engine.get_blocking_entity_at(nx, ny)
             and engine.game_map.is_walkable(nx, ny)
         ):
-            self.entity.move(move_x, move_y)
+            engine.spatial.move(self.entity, nx, ny)
             return ActionResult.SUCCESS
         return ActionResult.FAILURE
 
