@@ -574,27 +574,43 @@ class GameEngine:
         if self.dungeon_level % 5 == 0 and index == 0:
             return Monster.dragon(0, 0)
         
-        # Elite variants at high ascension
+        is_elite = False
         if self.ascension.tier >= 10 and random.random() < elite_chance:
-            # Could add elite versions here
-            pass
-        
+            is_elite = True
+
         if self.dungeon_level < 3:
-            return Monster.goblin(0, 0) if random.random() < 0.5 else Monster.orc(0, 0)
-        
-        roll = random.random()
-        if self.dungeon_level >= 7 and roll < 0.08:
-            return Monster.weaver(0, 0)
-        elif self.dungeon_level >= 5 and roll < 0.16:
-            return Monster.siphoner(0, 0)
-        elif self.dungeon_level >= 4 and roll < 0.26:
-            return Monster.disrupter(0, 0)
-        elif roll < 0.32:
-            return Monster.goblin(0, 0)
-        elif roll < 0.62:
-            return Monster.orc(0, 0)
+            monster = Monster.goblin(0, 0) if random.random() < 0.5 else Monster.orc(0, 0)
         else:
-            return Monster.troll(0, 0)
+            roll = random.random()
+            if self.dungeon_level >= 7 and roll < 0.08:
+                monster = Monster.weaver(0, 0)
+            elif self.dungeon_level >= 5 and roll < 0.16:
+                monster = Monster.siphoner(0, 0)
+            elif self.dungeon_level >= 4 and roll < 0.26:
+                monster = Monster.disrupter(0, 0)
+            elif roll < 0.32:
+                monster = Monster.goblin(0, 0)
+            elif roll < 0.62:
+                monster = Monster.orc(0, 0)
+            else:
+                monster = Monster.troll(0, 0)
+
+        if is_elite:
+            monster.name = f"Elite {monster.name}"
+            monster.color = "#FFD700"  # Gold color for elites
+
+            # Boost stats
+            if hasattr(monster, "fighter") and monster.fighter:
+                monster.fighter.max_hp = int(monster.fighter.max_hp * 1.5)
+                monster.fighter.hp = monster.fighter.max_hp
+                monster.fighter.base_power += max(2, int(monster.fighter.base_power * 0.3))
+                monster.fighter.base_defense += max(1, int(monster.fighter.base_defense * 0.2))
+                monster.fighter.xp = int(monster.fighter.xp * 2.5)
+
+            if hasattr(monster, "level") and monster.level:
+                monster.level.xp_given = int(monster.level.xp_given * 2.5)
+
+        return monster
     
     def _select_item_type(self) -> Item:
         """Centralized item generation with better scaling."""

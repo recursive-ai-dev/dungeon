@@ -102,9 +102,9 @@ class Storylet:
         
         # Check chain dependency
         if self.triggers_after:
-            # This storylet requires another to have triggered first
-            # We'll check this in the StoryletSystem
-            pass
+            prerequisite = storylet_system.get_storylet_by_id(self.triggers_after)
+            if not prerequisite or not prerequisite.triggered:
+                return False
         
         # Check preconditions
         for key, value in self.preconditions.items():
@@ -189,8 +189,8 @@ class Storylet:
             engine.messages.append("The map reveals itself to you.")
         
         elif effect.effect_type == StoryletEffectType.TRIGGER_STORYLET:
-            # This is handled by the StoryletSystem
-            pass
+            if effect.target_storylet_id:
+                storylet_system._queue_chain_trigger(effect.target_storylet_id)
     
     def to_dict(self) -> Dict[str, Any]:
         """Serialize storylet to dict."""
