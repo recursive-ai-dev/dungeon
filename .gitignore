@@ -10,3 +10,7 @@ node_modules
 venv
 *.gguf
 *.safetensors
+build/
+dist/
+*.spec
+*.pyc
