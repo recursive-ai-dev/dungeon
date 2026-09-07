@@ -1,0 +1,51 @@
+$ pytest -q --no-header
+
+==================================== ERRORS ====================================
+____________________ ERROR collecting tests/test_combat.py _____________________
+ImportError while importing test module '/app/tests/test_combat.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_combat.py:2: in <module>
+    from entities.components import Fighter
+E   ModuleNotFoundError: No module named 'entities'
+___________________ ERROR collecting tests/test_entities.py ____________________
+ImportError while importing test module '/app/tests/test_entities.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_entities.py:2: in <module>
+    from entities.components import Fighter, Level
+E   ModuleNotFoundError: No module named 'entities'
+______________________ ERROR collecting tests/test_map.py ______________________
+ImportError while importing test module '/app/tests/test_map.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_map.py:2: in <module>
+    from map import Map, Rect, TileType
+E   ModuleNotFoundError: No module named 'map'
+___________________ ERROR collecting tests/test_storylets.py ___________________
+ImportError while importing test module '/app/tests/test_storylets.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_storylets.py:2: in <module>
+    from storylets import Storylet, StoryletEffect, StoryletEffectType, StoryletSystem
+E   ModuleNotFoundError: No module named 'storylets'
+=========================== short test summary info ============================
+ERROR tests/test_combat.py
+ERROR tests/test_entities.py
+ERROR tests/test_map.py
+ERROR tests/test_storylets.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 4 errors during collection !!!!!!!!!!!!!!!!!!!!
+4 errors in 0.21s
+[exit 2]

@@ -1,0 +1,114 @@
+$ ruff check --output-format=concise /app
+apply_status_effect.py:1:8: F401 [*] `sys` imported but unused
+engine.py:2:8: F401 [*] `math` imported but unused
+engine.py:9:5: F401 [*] `typing.Callable` imported but unused
+engine.py:116:33: F841 [*] Local variable `e` is assigned to but never used
+engine.py:1519:40: E701 Multiple statements on one line (colon)
+engine.py:1520:42: E701 Multiple statements on one line (colon)
+entities/__init__.py:8:8: F401 `random` imported but unused
+entities/__init__.py:10:51: F401 `typing.Union` imported but unused
+entities/__init__.py:17:24: F401 `engine.GameEngine` imported but unused; consider removing, adding to `__all__`, or using a redundant alias
+entities/__init__.py:330:16: F811 [*] Redefinition of unused `random` from line 8: `random` redefined here
+entities/__init__.py:347:16: F811 [*] Redefinition of unused `random` from line 8: `random` redefined here
+entities/ai.py:724:9: F841 Local variable `dx` is assigned to but never used
+entities/ai.py:724:13: F841 Local variable `dy` is assigned to but never used
+entities/components.py:172:1: E402 Module level import not at top of file
+entities/consumables.py:15:19: F401 [*] `.Entity` imported but unused
+entities/spells.py:6:35: F401 [*] `typing.Callable` imported but unused
+entities/spells.py:1906:20: F541 [*] f-string without any placeholders
+entities/status_effects.py:20:33: F821 Undefined name `Fighter`
+entities/status_effects.py:23:36: F821 Undefined name `Fighter`
+entities/status_effects.py:27:34: F821 Undefined name `Fighter`
+entities/status_effects.py:79:33: F821 Undefined name `Fighter`
+entities/status_effects.py:82:36: F821 Undefined name `Fighter`
+entities/status_effects.py:92:33: F821 Undefined name `Fighter`
+entities/status_effects.py:95:36: F821 Undefined name `Fighter`
+entities/status_effects.py:105:33: F821 Undefined name `Fighter`
+entities/status_effects.py:108:36: F821 Undefined name `Fighter`
+entities/status_effects.py:117:33: F821 Undefined name `Fighter`
+entities/status_effects.py:120:36: F821 Undefined name `Fighter`
+entities/status_effects.py:129:33: F821 Undefined name `Fighter`
+entities/status_effects.py:132:36: F821 Undefined name `Fighter`
+entities/status_effects.py:141:33: F821 Undefined name `Fighter`
+entities/status_effects.py:144:36: F821 Undefined name `Fighter`
+entities/status_effects.py:157:33: F821 Undefined name `Fighter`
+entities/status_effects.py:160:36: F821 Undefined name `Fighter`
+entities/status_effects.py:169:33: F821 Undefined name `Fighter`
+entities/status_effects.py:172:36: F821 Undefined name `Fighter`
+entities/status_effects.py:181:33: F821 Undefined name `Fighter`
+entities/status_effects.py:184:36: F821 Undefined name `Fighter`
+entities/status_effects.py:194:33: F821 Undefined name `Fighter`
+entities/status_effects.py:197:36: F821 Undefined name `Fighter`
+entities/status_effects.py:207:33: F821 Undefined name `Fighter`
+entities/status_effects.py:210:36: F821 Undefined name `Fighter`
+entities/status_effects.py:219:33: F821 Undefined name `Fighter`
+entities/status_effects.py:222:36: F821 Undefined name `Fighter`
+entities/status_effects.py:232:33: F821 Undefined name `Fighter`
+entities/status_effects.py:235:36: F821 Undefined name `Fighter`
+entities/status_effects.py:237:16: F541 [*] f-string without any placeholders
+entities/status_effects.py:244:33: F821 Undefined name `Fighter`
+entities/status_effects.py:247:36: F821 Undefined name `Fighter`
+entities/status_effects.py:257:33: F821 Undefined name `Fighter`
+entities/status_effects.py:260:36: F821 Undefined name `Fighter`
+entities/status_effects.py:269:33: F821 Undefined name `Fighter`
+entities/status_effects.py:272:36: F821 Undefined name `Fighter`
+entities/status_effects.py:274:16: F541 [*] f-string without any placeholders
+entities/status_effects.py:281:33: F821 Undefined name `Fighter`
+entities/status_effects.py:284:36: F821 Undefined name `Fighter`
+entities/status_effects.py:296:57: F821 Undefined name `Fighter`
+entities/status_effects.py:321:39: F821 Undefined name `Fighter`
+entities/status_effects.py:332:41: F821 Undefined name `Fighter`
+fix_entities_init.py:1:8: F401 [*] `sys` imported but unused
+main.py:20:27: F401 [*] `textual.color.Color` imported but unused
+main.py:21:32: F401 [*] `textual.containers.Container` imported but unused
+main.py:21:65: F401 [*] `textual.containers.Grid` imported but unused
+main.py:22:30: F401 [*] `textual.reactive.reactive` imported but unused
+main.py:32:5: F401 [*] `textual.widgets.RichLog` imported but unused
+main.py:33:5: F401 [*] `textual.widgets.ProgressBar` imported but unused
+main.py:39:5: F401 [*] `textual.widgets.Select` imported but unused
+main.py:41:28: F401 [*] `textual.worker.Worker` imported but unused
+main.py:46:5: F401 [*] `entities.LoreSystem` imported but unused
+main.py:47:5: F401 [*] `entities.Player` imported but unused
+main.py:623:9: F841 Local variable `mana_str` is assigned to but never used
+multi_ui.py:6:32: F401 [*] `textual.containers.Container` imported but unused
+multi_ui.py:7:28: F401 [*] `textual.events.Key` imported but unused
+multi_ui.py:8:36: F401 [*] `textual.screen.ModalScreen` imported but unused
+multi_ui.py:9:37: F401 [*] `textual.widgets.Footer` imported but unused
+multi_ui.py:76:17: E722 Do not use bare `except`
+multi_ui.py:98:9: F841 Local variable `player_map` is assigned to but never used
+network.py:5:8: F401 [*] `sys` imported but unused
+network.py:9:52: F401 [*] `typing.Set` imported but unused
+network.py:9:64: F401 [*] `typing.Any` imported but unused
+network.py:10:18: F401 [*] `enum.Enum` imported but unused
+network.py:10:24: F401 [*] `enum.auto` imported but unused
+network.py:11:25: F401 [*] `collections.defaultdict` imported but unused
+network.py:732:21: F541 [*] f-string without any placeholders
+run.py:4:8: F401 [*] `os` imported but unused
+run.py:13:1: E402 Module level import not at top of file
+run.py:14:1: E402 Module level import not at top of file
+save_system.py:9:24: F401 [*] `enum.auto` imported but unused
+save_system.py:10:47: F401 [*] `typing.Protocol` imported but unused
+save_system.py:10:57: F401 [*] `typing.TypeVar` imported but unused
+save_system.py:10:66: F401 [*] `typing.Callable` imported but unused
+save_system.py:11:21: F401 [*] `pathlib.Path` imported but unused
+save_system.py:12:8: F401 [*] `time` imported but unused
+save_system.py:19:24: F401 [*] `engine.GameEngine` imported but unused
+save_system.py:191:13: E722 Do not use bare `except`
+save_system.py:282:13: E722 Do not use bare `except`
+save_system.py:404:13: E722 Do not use bare `except`
+save_system.py:465:13: E722 Do not use bare `except`
+save_system.py:506:13: F541 [*] f-string without any placeholders
+save_system.py:508:13: F541 [*] f-string without any placeholders
+storylets.py:8:62: F401 [*] `typing.Callable` imported but unused
+tests/test_combat.py:1:8: F401 [*] `pytest` imported but unused
+tests/test_combat.py:4:8: F401 [*] `random` imported but unused
+tests/test_entities.py:2:33: F401 [*] `entities.components.Fighter` imported but unused
+tests/test_entities.py:3:22: F401 [*] `entities.Entity` imported but unused
+tests/test_entities.py:5:25: F401 [*] `entities.ai.ActionResult` imported but unused
+tests/test_map.py:1:8: F401 [*] `pytest` imported but unused
+tests/test_storylets.py:1:8: F401 [*] `pytest` imported but unused
+tests/test_storylets.py:3:33: F401 [*] `entities.components.Fighter` imported but unused
+tests/test_storylets.py:4:22: F401 [*] `entities.Entity` imported but unused
+Found 110 errors.
+[*] 53 fixable with the `--fix` option (4 hidden fixes can be enabled with the `--unsafe-fixes` option).
+[exit 1]
