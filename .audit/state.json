@@ -1,0 +1,1 @@
+{"phase": "function", "worklist": ["engine.py", "map.py", "entities/components.py", "entities/ai.py", "entities/spells.py", "entities/status_effects.py", "main.py", "multi_ui.py", "network.py", "save_system.py", "storylets.py"]}

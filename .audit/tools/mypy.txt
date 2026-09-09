@@ -1,0 +1,5 @@
+$ mypy --no-error-summary /app
+entities/ai.py: error: Source file found twice under different module names: "app.entities.ai" and "entities.ai"
+entities/ai.py: note: See https://mypy.readthedocs.io/en/stable/running_mypy.html#mapping-file-paths-to-modules for more info
+entities/ai.py: note: Common resolutions include: a) adding `__init__.py` somewhere, b) using `--explicit-package-bases` or adjusting MYPYPATH
+[exit 2]
